@@ -79,6 +79,20 @@ android {
         }
     }
 
+    testOptions {
+        unitTests{
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += ['src/test/java']
+            resources.srcDirs += ['src/test/res']
+        }
+    }
+
 }
 
 dependencies {
@@ -115,4 +129,12 @@ dependencies {
 
     //Kotlin coroutines
     api supportDependencies.coroutines
+
+    //test environment
+    testImplementation testDependencies.testJUnit
+    testImplementation testDependencies.testCoreKtx
+    testImplementation testDependencies.testCoreExt
+    testImplementation testDependencies.testIOMock
+    testImplementation testDependencies.testRobolectric
+
 }

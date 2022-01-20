@@ -7,6 +7,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flixbus.timetable.R
+import com.flixbus.timetable.api.ApiManager
+import com.flixbus.timetable.api.repository.StationTimeTableRepository
 import com.flixbus.timetable.api.response.ErrorResponse
 import com.flixbus.timetable.api.response.ResponseData
 import com.flixbus.timetable.api.response.ResponseStatus
@@ -44,7 +46,8 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
         initView()
 
         //read data from API
-        mViewModel.getStationDepartureTimeTable(this).observe(this, {
+        val stationTimeTableRepository = StationTimeTableRepository(ApiManager.instance.getApiRepository(), this)
+        mViewModel.getStationDepartureTimeTable(stationTimeTableRepository).observe(this, {
             responseData -> handleStationResponseData(responseData)
         })
     }
@@ -62,11 +65,7 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
     private fun handleStationResponseData(responseData: ResponseData<Parcelable>) {
         if (responseData.status == ResponseStatus.SUCCESS) {
             val timeTableData = responseData.data as StationTimeTableResponse
-
-            val departures = timeTableData.timetable.departures
-            val departureList = departures.sortedBy {
-                it.datetime.timestamp
-            }
+            val departureList = mViewModel.getSortedDepartureData(timeTableData)
             if(departureList.isEmpty()){
                 mBinding.timetableRecyclerView.hide()
                 mBinding.timetableTvInfo.show()
