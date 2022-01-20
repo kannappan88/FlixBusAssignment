@@ -9,4 +9,5 @@
 
     <!-- Font Sizes -->
     <dimen name="text_size_18_sp">18sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
 </resources>

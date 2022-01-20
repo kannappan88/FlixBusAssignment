@@ -12,6 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textview.MaterialTextView
@@ -56,8 +57,10 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/spacing_4_dp"
             android:background="?android:attr/dividerVertical"
+            app:layout_constraintTop_toBottomOf="@id/time_table_tv_line_number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

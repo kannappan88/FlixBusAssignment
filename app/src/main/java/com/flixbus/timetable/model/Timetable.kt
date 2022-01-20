@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TimetableX(
+data class Timetable(
     @SerializedName("arrivals")
     val arrivals: List<Arrival> = listOf(),
     @SerializedName("departures")

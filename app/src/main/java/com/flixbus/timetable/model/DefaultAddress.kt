@@ -10,7 +10,7 @@ data class DefaultAddress(
     @SerializedName("address")
     val address: String = "",
     @SerializedName("coordinates")
-    val coordinates: CoordinatesX = CoordinatesX(),
+    val coordinates: Coordinates = Coordinates(),
     @SerializedName("full_address")
     val fullAddress: String = ""
 ) : Parcelable

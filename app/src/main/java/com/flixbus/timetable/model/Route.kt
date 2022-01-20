@@ -10,9 +10,9 @@ data class Route(
     @SerializedName("address")
     val address: String = "",
     @SerializedName("coordinates")
-    val coordinates: CoordinatesXX = CoordinatesXX(),
+    val coordinates: Coordinates = Coordinates(),
     @SerializedName("default_address")
-    val defaultAddress: DefaultAddressX = DefaultAddressX(),
+    val defaultAddress: DefaultAddress = DefaultAddress(),
     @SerializedName("full_address")
     val fullAddress: String = "",
     @SerializedName("id")

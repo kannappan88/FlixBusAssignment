@@ -1,8 +1,9 @@
 package com.flixbus.timetable.api.response
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.flixbus.timetable.model.Station
-import com.flixbus.timetable.model.TimetableX
+import com.flixbus.timetable.model.Timetable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -16,9 +17,10 @@ import kotlinx.android.parcel.Parcelize
  * Description       : Initial version
  */
 @Parcelize
+@Keep
 data class StationTimeTableResponse(
     @SerializedName("station")
     val station: Station = Station(),
     @SerializedName("timetable")
-    val timetable: TimetableX = TimetableX()
+    val timetable: Timetable = Timetable()
 ) : Parcelable

@@ -3,8 +3,10 @@ package com.flixbus.timetable.ui.activity
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.flixbus.timetable.R
 import com.flixbus.timetable.api.response.ErrorResponse
 import com.flixbus.timetable.api.response.ResponseData
 import com.flixbus.timetable.api.response.ResponseStatus
@@ -35,6 +37,7 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         mBinding = ActivityTimetableBinding.inflate(layoutInflater, null, false)
         setContentView(mBinding.root)
 
@@ -59,12 +62,20 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
     private fun handleStationResponseData(responseData: ResponseData<Parcelable>) {
         if (responseData.status == ResponseStatus.SUCCESS) {
             val timeTableData = responseData.data as StationTimeTableResponse
-            mBinding.timetableRecyclerView.show()
-            mBinding.timetableTvInfo.hide()
-            val departureList = timeTableData.timetable.departures.sortedBy {
+
+            val departures = timeTableData.timetable.departures
+            val departureList = departures.sortedBy {
                 it.datetime.timestamp
             }
-            mAdapter.updateData(departureList)
+            if(departureList.isEmpty()){
+                mBinding.timetableRecyclerView.hide()
+                mBinding.timetableTvInfo.show()
+                mBinding.timetableTvInfo.text = getString(R.string.no_data_available)
+            } else {
+                mBinding.timetableRecyclerView.show()
+                mBinding.timetableTvInfo.hide()
+                mAdapter.updateData(departureList)
+            }
         } else {
             val errorResponse = responseData.data as ErrorResponse
             mBinding.timetableRecyclerView.hide()

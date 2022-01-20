@@ -59,6 +59,7 @@ ext {
             appcompatDesign         : "androidx.appcompat:appcompat:${appcompat}",
             constraintlayout        : "androidx.constraintlayout:constraintlayout:${constraintVersion}",
             materialDesign          : "com.google.android.material:material:${material}",
+            splashscreen            : "androidx.core:core-splashscreen:1.0.0-alpha02",
 
             //Lifecycle
             lifecycle           : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",

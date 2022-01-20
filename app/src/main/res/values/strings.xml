@@ -2,4 +2,5 @@
     <string name="app_name">FlixbusTimetable</string>
     <string name="time_table">Time Table</string>
     <string name="error_network_not_available">Please check your network connection</string>
+    <string name="no_data_available">No data available</string>
 </resources>

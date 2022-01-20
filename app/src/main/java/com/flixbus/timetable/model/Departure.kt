@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Departure(
     @SerializedName("datetime")
-    val datetime: DatetimeX = DatetimeX(),
+    val datetime: Datetime = Datetime(),
     @SerializedName("direction")
     val direction: String = "",
     @SerializedName("has_tracker")
@@ -22,7 +22,7 @@ data class Departure(
     @SerializedName("ride_id")
     val rideId: Int = 0,
     @SerializedName("route")
-    val route: List<RouteX> = listOf(),
+    val route: List<Route> = listOf(),
     @SerializedName("through_the_stations")
     val throughTheStations: String = "",
     @SerializedName("trip_uid")

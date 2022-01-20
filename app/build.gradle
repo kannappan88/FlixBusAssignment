@@ -10,7 +10,7 @@ android {
     buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
-        applicationId versions.applicationId
+        applicationId applicationId
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
         versionCode versions.versionCode
@@ -23,10 +23,23 @@ android {
         viewBinding true
     }
 
+    signingConfigs {
+        config {
+            storeFile file("${project.projectDir}/keystore.jks")
+            storePassword 'flix!123'
+            keyAlias 'flixbus'
+            keyPassword 'flix!123'
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            applicationIdSuffix ".release"
+            minifyEnabled true
+            shrinkResources false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
 
         debug {
@@ -34,6 +47,16 @@ android {
             minifyEnabled false
             shrinkResources false
             debuggable true
+            testCoverageEnabled = true
+        }
+
+        store {
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable false
+            matchingFallbacks = ['debug', 'release']
         }
     }
     compileOptions {
@@ -43,6 +66,19 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def project = "FlixBusTimeTable"
+            def SEP = "_"
+            def version = variant.versionName
+            def date = new Date()
+            def formattedDate = date.format('dd-MM-yyyy')
+            def newApkName = project + SEP + version + SEP + formattedDate + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+
 }
 
 dependencies {
@@ -55,6 +91,7 @@ dependencies {
     implementation supportDependencies.appcompatDesign
     implementation supportDependencies.constraintlayout
     implementation supportDependencies.materialDesign
+    implementation supportDependencies.splashscreen
 
     //Recycler view
     implementation supportDependencies.recyclerview

@@ -51,9 +51,9 @@ class TimeTableAdapter(
     inner class RecyclerItemViewHolder(private val timetableBinding: RowTimetableBinding) :
         RecyclerView.ViewHolder(timetableBinding.root) {
         fun bind(departure: Departure) {
-            val datetimeX = departure.datetime
+            val datetime = departure.datetime
             val departureTime =
-                DateTimeUtils.getTimeBasedOnTimezone(FlixBusConstant.DEPARTUE_TIME_PATTERN, datetimeX.tz, datetimeX.timestamp)
+                DateTimeUtils.getTimeBasedOnTimezone(FlixBusConstant.DEPARTUE_TIME_PATTERN, datetime.tz, datetime.timestamp)
             timetableBinding.timetableTvTime.text = departureTime
             timetableBinding.model = departure
             timetableBinding.executePendingBindings()
