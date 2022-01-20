@@ -1,9 +1,10 @@
 package com.flixbus.timetable.api.repository
 
+import android.content.Context
 import androidx.lifecycle.liveData
 import com.flixbus.timetable.api.response.ResponseData
 import com.flixbus.timetable.api.response.ResponseStatus
-import retrofit2.await
+import retrofit2.awaitResponse
 
 /**
  * Project           : FlixbusTimetable
@@ -14,14 +15,19 @@ import retrofit2.await
  * Original author   : Kannappan
  * Description       : Initial version
  */
-class StationTimeTableRepository(apiRepository: ApiRepository): BaseApiRepository(apiRepository) {
+class StationTimeTableRepository(apiRepository: ApiRepository, context: Context): BaseApiRepository(apiRepository, context) {
 
     fun getStationTimeTableData() = liveData{
         try {
-            val data = apiRepository.getStationTimeTable()?.await()
-            emit(ResponseData(data = data, message = "SUCCESS", ResponseStatus.SUCCESS))
+            if(hasNetwork()) {
+                val data = apiRepository.getStationTimeTable()?.awaitResponse()
+                emit(ResponseData(data = data?.body(), message = "SUCCESS", ResponseStatus.SUCCESS))
+            } else {
+                emit(ResponseData(data = getNetworkErrorResponse(), message = "Error", ResponseStatus.ERROR))
+            }
         } catch (exception: Exception) {
-            emit(ResponseData(data = null, message = exception.message ?: "Error", ResponseStatus.ERROR))
+            emit(ResponseData(data = getNetworkErrorResponse(), message = exception.message ?: "Error", ResponseStatus.ERROR))
         }
     }
+
 }

@@ -1,7 +1,9 @@
 package com.flixbus.timetable.util
 
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Project           : FlixbusTimetable
@@ -13,10 +15,15 @@ import java.util.*
  * Description       : Initial version
  */
 object DateTimeUtils {
-
-    fun getTimeBasedOnTimezone(datePattern: String, timezoneId: String, timestamp: Long): String {
-        val simpleDateFormat = SimpleDateFormat(datePattern, Locale.ENGLISH)
+    private const val TAG = "DateTimeUtils"
+    fun getTimeBasedOnTimezone(datePattern: String, timezoneId: String, timestampInSeconds: Long): String {
+        val timestampMillis = TimeUnit.SECONDS.toMillis(timestampInSeconds)
+        val simpleDateFormat = SimpleDateFormat(datePattern, Locale.getDefault())
         simpleDateFormat.timeZone = TimeZone.getTimeZone(timezoneId)
-        return simpleDateFormat.format(timestamp) ?:""
+        Log.d(
+            TAG,
+            "Timestamp: $timestampInSeconds , $timezoneId: ${simpleDateFormat.format(timestampMillis)}"
+        )
+        return simpleDateFormat.format(timestampMillis) ?: ""
     }
 }

@@ -1,5 +1,10 @@
 package com.flixbus.timetable.api.repository
 
+import android.content.Context
+import com.flixbus.timetable.R
+import com.flixbus.timetable.api.response.ErrorResponse
+import com.flixbus.timetable.util.NetworkUtil
+
 /**
  * Project           : FlixbusTimetable
  * File Name         : BaseApiRepository
@@ -9,4 +14,12 @@ package com.flixbus.timetable.api.repository
  * Original author   : Kannappan
  * Description       : Initial version
  */
-open class BaseApiRepository(val apiRepository: ApiRepository)
+open class BaseApiRepository(val apiRepository: ApiRepository, val context: Context){
+
+    fun hasNetwork() = NetworkUtil.isNetworkOnline(context)
+
+    fun getNetworkErrorResponse(): ErrorResponse {
+        return  ErrorResponse(0, context.getString(R.string.error_network_not_available))
+    }
+
+}

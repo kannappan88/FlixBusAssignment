@@ -1,6 +1,6 @@
 package com.flixbus.timetable.api.client
 
-import com.flixbus.timetable.model.TimeTable
+import com.flixbus.timetable.api.response.StationTimeTableResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -16,5 +16,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET("mobile/v1/network/station/1/timetable.json")
-    fun getStationTimeTable(): Call<TimeTable?>?
+    fun getStationTimeTable(): Call<StationTimeTableResponse?>?
 }

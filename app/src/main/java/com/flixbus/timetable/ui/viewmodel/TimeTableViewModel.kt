@@ -1,11 +1,12 @@
 package com.flixbus.timetable.ui.viewmodel
 
+import android.content.Context
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.flixbus.timetable.api.ApiManager
 import com.flixbus.timetable.api.repository.StationTimeTableRepository
 import com.flixbus.timetable.api.response.ResponseData
-import com.flixbus.timetable.model.TimeTable
 
 /**
  * Project           : FlixbusTimetable
@@ -18,9 +19,9 @@ import com.flixbus.timetable.model.TimeTable
  */
 class TimeTableViewModel : ViewModel() {
 
-    fun getStationDepartureTimeTable(): LiveData<ResponseData<TimeTable>> {
+    fun getStationDepartureTimeTable(context: Context): LiveData<ResponseData<Parcelable>> {
         val stationTimeTableRepository =
-            StationTimeTableRepository(ApiManager.instance.getApiRepository())
+            StationTimeTableRepository(ApiManager.instance.getApiRepository(), context)
         return stationTimeTableRepository.getStationTimeTableData()
     }
 

@@ -1,17 +1,21 @@
 package com.flixbus.timetable.ui.activity
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.flixbus.timetable.api.response.ErrorResponse
 import com.flixbus.timetable.api.response.ResponseData
 import com.flixbus.timetable.api.response.ResponseStatus
+import com.flixbus.timetable.api.response.StationTimeTableResponse
 import com.flixbus.timetable.databinding.ActivityTimetableBinding
-import com.flixbus.timetable.model.TimeTable
 import com.flixbus.timetable.ui.OnTimeTableItemClickListener
 import com.flixbus.timetable.ui.adapter.TimeTableAdapter
 import com.flixbus.timetable.ui.common.BaseActivity
 import com.flixbus.timetable.ui.viewmodel.TimeTableViewModel
+import com.flixbus.timetable.util.hide
+import com.flixbus.timetable.util.show
 
 
 /**
@@ -37,7 +41,7 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
         initView()
 
         //read data from API
-        mViewModel.getStationDepartureTimeTable().observe(this, {
+        mViewModel.getStationDepartureTimeTable(this).observe(this, {
             responseData -> handleStationResponseData(responseData)
         })
     }
@@ -52,14 +56,20 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
         recyclerView.adapter = mAdapter
     }
 
-    private fun handleStationResponseData(responseData: ResponseData<TimeTable>) {
+    private fun handleStationResponseData(responseData: ResponseData<Parcelable>) {
         if (responseData.status == ResponseStatus.SUCCESS) {
-            val timeTableData = responseData.data
-            if (timeTableData != null) {
-                val departureList = timeTableData.timetable.departures
-                mAdapter.updateData(departureList)
+            val timeTableData = responseData.data as StationTimeTableResponse
+            mBinding.timetableRecyclerView.show()
+            mBinding.timetableTvInfo.hide()
+            val departureList = timeTableData.timetable.departures.sortedBy {
+                it.datetime.timestamp
             }
+            mAdapter.updateData(departureList)
         } else {
+            val errorResponse = responseData.data as ErrorResponse
+            mBinding.timetableRecyclerView.hide()
+            mBinding.timetableTvInfo.show()
+            mBinding.timetableTvInfo.text = errorResponse.errorMessage
             showToast(responseData.message)
         }
     }
