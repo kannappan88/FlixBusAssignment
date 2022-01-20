@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FlixbusTimetable</string>
+    <string name="time_table">Time Table</string>
+</resources>

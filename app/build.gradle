@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        applicationId versions.applicationId
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Kotlin
+    implementation supportDependencies.kotlin_stdlib
+    implementation supportDependencies.kotlin_ktx
+
+    //Design
+    implementation supportDependencies.appcompatDesign
+    implementation supportDependencies.constraintlayout
+    implementation supportDependencies.materialDesign
+
+    //Recycler view
+    implementation supportDependencies.recyclerview
+
+    //lifecycle
+    implementation supportDependencies.lifecycle
+    implementation supportDependencies.lifecycleViemodelKtx
+    implementation supportDependencies.lifecycleLiveDataKtx
+    implementation supportDependencies.lifecycleRuntime
+
+    //Activity & fragment KTX
+    implementation supportDependencies.activityKtx
+    implementation supportDependencies.fragmentKtx
+
+    //Retrofit
+    implementation supportDependencies.retrofitMain
+    implementation supportDependencies.retrofitGson
+    implementation supportDependencies.retrofitLogInterceptor
+    implementation supportDependencies.okhttp
+    implementation supportDependencies.gson
+
+    //Kotlin coroutines
+    api supportDependencies.coroutines
+}

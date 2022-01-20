@@ -1,0 +1,92 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = "1.5.20"
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+ext {
+
+    // sdk and tools
+    versions = [
+            versionCode      : 1,
+            versionName      : "1.0.0",
+            compileSdkVersion: 32,
+            targetSdkVersion : 30,
+            minSdkVersion    : 26,
+            buildToolsVersion: "30.0.3",
+            applicationId    : "com.flixbus.timetable"
+    ]
+
+    // dependencies versions
+    constraintVersion = '2.1.1'
+    ktx = "1.6.0"
+    appcompat = "1.4.0"
+    material = "1.4.0"
+    lifecycleVersion = "2.2.0"
+    roomVersion = "2.3.0"
+    retrofit = "2.9.0"
+    retrofitInterceptor = "4.9.0"
+    okHttpVer = "4.9.0"
+    recyclerviewVer = "1.2.1"
+    gsonVer = "2.8.8"
+    activityKTXVersion = "1.4.0"
+    coroutinesVersion = "1.4.1"
+
+    //Support Libraries dependencies
+    supportDependencies = [
+            //Kotlin
+            kotlin_stdlib           : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
+            kotlin_ktx              : "androidx.core:core-ktx:${ktx}",
+
+            //Design support
+            appcompatDesign         : "androidx.appcompat:appcompat:${appcompat}",
+            constraintlayout        : "androidx.constraintlayout:constraintlayout:${constraintVersion}",
+            materialDesign          : "com.google.android.material:material:${material}",
+
+            //Lifecycle
+            lifecycle           : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            lifecycleViemodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+            lifecycleLiveDataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}",
+            lifecycleRuntime    : "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleVersion}",
+
+
+            activityKtx             : "androidx.activity:activity-ktx:${activityKTXVersion}",
+            fragmentKtx             : "androidx.fragment:fragment-ktx:${activityKTXVersion}",
+
+            //Retrofit
+            retrofitMain            : "com.squareup.retrofit2:retrofit:${retrofit}",
+            retrofitGson            : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            retrofitLogInterceptor  : "com.squareup.okhttp3:logging-interceptor:${retrofitInterceptor}",
+            okhttp                  : "com.squareup.okhttp3:okhttp:${okHttpVer}",
+
+            //recyclerview
+            recyclerview            : "androidx.recyclerview:recyclerview:${recyclerviewVer}",
+
+            //GSON
+            gson                    : "com.google.code.gson:gson:${gsonVer}",
+
+            //coroutines
+            coroutines              : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}"
+    ]
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

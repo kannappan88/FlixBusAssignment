@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.flixbus.timetable.model.Departure" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time_table_tv_direction"
+            style="@style/PrimaryTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{model.direction}"
+            android:padding="@dimen/spacing_12_dp"
+            app:layout_constraintEnd_toStartOf="@id/timetable__tv_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Berlin" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timetable__tv_time"
+            style="@style/PrimaryTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_12_dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="12:30" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time_table_tv_line_number"
+            style="@style/PrimaryTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{model.lineCode}"
+            android:paddingStart="@dimen/spacing_12_dp"
+            android:paddingTop="@dimen/spacing_8_dp"
+            android:paddingEnd="@dimen/spacing_0_dp"
+            android:paddingBottom="@dimen/spacing_8_dp"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toStartOf="@id/timetable__tv_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_table_tv_direction"
+            tools:text="Berlin" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
