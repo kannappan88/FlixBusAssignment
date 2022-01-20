@@ -19,9 +19,9 @@ class StationTimeTableRepository(apiRepository: ApiRepository, context: Context)
 
     fun getStationTimeTableData() = liveData{
         try {
-            if(hasNetwork()) {
-                val data = apiRepository.getStationTimeTable()?.awaitResponse()
-                emit(ResponseData(data = data?.body(), message = "SUCCESS", ResponseStatus.SUCCESS))
+            val data = apiRepository.getStationTimeTable()?.awaitResponse()
+            if (data?.isSuccessful == true) {
+                emit(ResponseData(data = data.body(), message = "SUCCESS", ResponseStatus.SUCCESS))
             } else {
                 emit(ResponseData(data = getNetworkErrorResponse(), message = "Error", ResponseStatus.ERROR))
             }
