@@ -62,12 +62,12 @@ ext {
             splashscreen            : "androidx.core:core-splashscreen:1.0.0-alpha02",
 
             //Lifecycle
-            lifecycle           : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
-            lifecycleViemodelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
-            lifecycleLiveDataKtx: "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}",
-            lifecycleRuntime    : "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleVersion}",
+            lifecycle               : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            lifecycleViemodelKtx    : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+            lifecycleLiveDataKtx    : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}",
+            lifecycleRuntime        : "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycleVersion}",
 
-
+            //Activity KTX
             activityKtx             : "androidx.activity:activity-ktx:${activityKTXVersion}",
             fragmentKtx             : "androidx.fragment:fragment-ktx:${activityKTXVersion}",
 

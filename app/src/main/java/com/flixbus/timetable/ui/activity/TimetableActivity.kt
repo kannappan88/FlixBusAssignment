@@ -81,7 +81,7 @@ class TimetableActivity : BaseActivity(), OnTimeTableItemClickListener {
             mBinding.timetableRecyclerView.hide()
             mBinding.timetableTvInfo.show()
             mBinding.timetableTvInfo.text = errorResponse.errorMessage
-            showToast(responseData.message)
+            showToast(errorResponse.errorMessage)
         }
     }
 }

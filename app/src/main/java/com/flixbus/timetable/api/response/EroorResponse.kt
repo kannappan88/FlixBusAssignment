@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Project           : FlixbusTimetable
- * File Name         : EroorResponse
+ * File Name         : ErrorResponse
  * Description       :
  * Revision History  : version 1
  * Date              : 20/01/22
